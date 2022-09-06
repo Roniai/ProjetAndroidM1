@@ -10,9 +10,11 @@ use App\Repository\LecteurRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(formats= {"json"})
  * @ORM\Entity(repositoryClass=LecteurRepository::class)
  */
+
+#[ApiResource(formats: ['json' => ['application/json']])]
 
 class Lecteur
 {

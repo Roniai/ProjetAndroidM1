@@ -1,20 +1,10 @@
 package com.fex.projetandroidm1.model;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Lecteur {
-
     private String numlecteur;
     private String nomlecteur;
 
-    public Lecteur(JSONObject object) {
-        try {
-            this.numlecteur = object.getString("numlecteur");
-            this.nomlecteur = object.getString("nomlecteur");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public Lecteur() {
     }
 
     public Lecteur(String numlecteur, String nomlecteur) {
@@ -23,7 +13,7 @@ public class Lecteur {
     }
 
     public String getNumlecteur() {
-        return this.numlecteur;
+        return numlecteur;
     }
 
     public void setNumlecteur(String numlecteur) {
@@ -31,7 +21,7 @@ public class Lecteur {
     }
 
     public String getNomlecteur() {
-        return this.nomlecteur;
+        return nomlecteur;
     }
 
     public void setNomlecteur(String nomlecteur) {

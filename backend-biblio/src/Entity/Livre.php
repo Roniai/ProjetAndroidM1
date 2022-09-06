@@ -7,7 +7,7 @@ use App\Repository\LivreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(formats= {"json"})
  * @ORM\Entity(repositoryClass=LivreRepository::class)
  */
 class Livre

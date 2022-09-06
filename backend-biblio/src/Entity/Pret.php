@@ -7,7 +7,7 @@ use App\Repository\PretRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(formats= {"json"})
  * @ORM\Entity(repositoryClass=PretRepository::class)
  */
 class Pret
