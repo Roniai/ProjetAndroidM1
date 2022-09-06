@@ -1,9 +1,16 @@
 package com.fex.projetandroidm1;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.ServerError;
@@ -31,7 +40,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnRefreshListener {
 
@@ -39,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
     private SwipeRefreshLayout refresh;
     private ArrayList<Lecteur> lecteur = new ArrayList<>();
     private JsonArrayRequest arrayRequest;
+    private JsonObjectRequest jsonObjectRequest;
     private RecyclerView recyclerView;
     private Dialog dialog;
     private LecteurAdapter lecteurAdapter;
@@ -46,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
     /*1.Activer WIFI dans l'Emulateur
     * 2.http://10.0.2.2:<port> => fait référence à http://localhost:<port> de votre machine*/
     private String url = "http://10.0.2.2:8000/api/lecteurs";
+
+    /*Lancer dans un smartphone Android => Adresse IP WIFI : http://192.168.43.206/*/
 
     /*Pour régler le problème de TimeoutError*/
     public static int TIMEOUT_MS=15000; //15s
@@ -70,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         });
     }
 
+    /*READ - GET*/
     private void getData(){
         refresh.setRefreshing(true);
 
@@ -116,6 +132,82 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         lecteurAdapter = new LecteurAdapter(this, lecteur);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(lecteurAdapter);
+    }
+
+    /*ADD - POST*/
+    public void addLecteur(View v){
+        TextView close, action;
+        EditText numlecteur, nomlecteur;
+        Button submit;
+
+        dialog.setContentView(R.layout.activity_modlecture);
+
+        action = (TextView) dialog.findViewById(R.id.action);
+        action.setText("Nouveau lecteur");
+
+        close = (TextView) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
+        nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
+
+        submit = (Button) dialog.findViewById(R.id.submit);
+        submit.setText("Ajouter");
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String numlecteur_val = numlecteur.getText().toString();
+                String nomlecteur_val = nomlecteur.getText().toString();
+                addSubmit(numlecteur_val, nomlecteur_val);
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    private void addSubmit(String num, String nom){
+        /*GET PARAMS*/
+        try{
+            JSONObject parameters = new JSONObject();
+            parameters.put("numlecteur", num);
+            parameters.put("nomlecteur", nom);
+
+            /*ADD PARAMS*/
+            jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.dismiss();
+                        refresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                lecteur.clear();
+                                getData();
+                            }
+                        });
+
+                        Toast.makeText(getApplicationContext(), "Le nouveau lecteur est enregisté", Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                });
+
+            Volley.newRequestQueue(this).add(jsonObjectRequest);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
