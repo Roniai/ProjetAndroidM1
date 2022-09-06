@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
                             }
                         });
 
-                        Toast.makeText(getApplicationContext(), "Le nouveau lecteur est enregisté", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Le nouveau lecteur est enregistré", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void onRefresh() {

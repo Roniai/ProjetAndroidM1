@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetAndroidM1</string>
+    <string name="app_name">Gestion bibliothécaire</string>
 
     <string name="label_numlecteur">Numéro</string>
     <string name="label_nomlecteur">Nom</string>
