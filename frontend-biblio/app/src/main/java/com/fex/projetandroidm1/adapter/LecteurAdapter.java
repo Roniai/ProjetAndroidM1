@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fex.projetandroidm1.R;
 import com.fex.projetandroidm1.model.Lecteur;
@@ -62,6 +63,13 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
                 editLecteur(num, nom);
             }
         });
+        holder.deleteLecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String num = lecteur.get(position).getNumlecteur();
+                deleteLecteur(num);
+            }
+        });
     }
 
     /*UPDATE - PUT*/
@@ -72,10 +80,10 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
 
         dialog = new Dialog(context);
 
-        dialog.setContentView(R.layout.activity_modlecture);
+        dialog.setContentView(R.layout.dialog_formslec);
 
         action = (TextView) dialog.findViewById(R.id.action);
-        action.setText("Ancien lecteur");
+        action.setText("Modification");
 
         close = (TextView) dialog.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener(){
@@ -139,6 +147,67 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
             e.printStackTrace();
         }
     }
+
+    /*DELETE - DELETE*/
+    private void deleteLecteur(String num){
+        TextView close, action;
+        Button submit, dismiss;
+
+        dialog = new Dialog(context);
+
+        dialog.setContentView(R.layout.dialog_deletelec);
+
+        close = (TextView) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        /*Boutton Annuler*/
+        dismiss = (Button) dialog.findViewById(R.id.dismiss);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        /*Boutton Supprimer*/
+        submit = (Button) dialog.findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteSubmit(num);
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    private void deleteSubmit(String num){
+            StringRequest request = new StringRequest(Request.Method.DELETE, url+"/"+num,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            dialog.dismiss();
+
+                            Toast.makeText(context, "Le lecteur est supprimé", Toast.LENGTH_LONG).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                            error.printStackTrace();
+                        }
+                    });
+
+            Volley.newRequestQueue(context).add(request);
+    }
+
 
     @Override
     public int getItemCount() {
