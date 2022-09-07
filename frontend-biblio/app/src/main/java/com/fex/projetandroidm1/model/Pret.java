@@ -9,14 +9,7 @@ public class Pret {
     private String numlivre;
     private String datepret;
 
-    public Pret(JSONObject object) {
-        try {
-            this.numlecteur = object.getString("numlecteur");
-            this.numlivre = object.getString("numlivre");
-            this.datepret = object.getString("datepret");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public Pret() {
     }
 
     public Pret(String numlecteur, String numlivre, String datepret) {
@@ -26,7 +19,7 @@ public class Pret {
     }
 
     public String getNumlecteur() {
-        return this.numlecteur;
+        return numlecteur;
     }
 
     public void setNumlecteur(String numlecteur) {
@@ -34,7 +27,7 @@ public class Pret {
     }
 
     public String getNumlivre() {
-        return this.numlivre;
+        return numlivre;
     }
 
     public void setNumlivre(String numlivre) {
@@ -42,7 +35,7 @@ public class Pret {
     }
 
     public String getDatepret() {
-        return this.datepret;
+        return datepret;
     }
 
     public void setDatepret(String datepret) {

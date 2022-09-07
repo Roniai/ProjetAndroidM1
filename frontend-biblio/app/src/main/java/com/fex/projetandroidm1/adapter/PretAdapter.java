@@ -23,64 +23,67 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fex.projetandroidm1.R;
-import com.fex.projetandroidm1.model.Lecteur;
+import com.fex.projetandroidm1.model.Pret;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHolder> {
+public class PretAdapter extends RecyclerView.Adapter<PretAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<Lecteur> lecteur;
+    private ArrayList<Pret> pret;
 
     private Dialog dialog;
-    private String url = "http://10.0.2.2:8000/api/lecteurs";
+    private String url = "http://10.0.2.2:8000/api/prets";
 
-    public LecteurAdapter(Context context, ArrayList<Lecteur> lecteur) {
+    public PretAdapter(Context context, ArrayList<Pret> pret) {
         this.context = context;
-        this.lecteur = lecteur;
+        this.pret = pret;
     }
 
     @NonNull
     @Override
-    public LecteurAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PretAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        view = layoutInflater.inflate(R.layout.lecteur_list, parent, false);
+        view = layoutInflater.inflate(R.layout.pret_list, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LecteurAdapter.MyViewHolder holder, int position) {
-        holder.numlecteur.setText(lecteur.get(position).getNumlecteur());
-        holder.nomlecteur.setText(lecteur.get(position).getNomlecteur());
-        holder.editLecteur.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull PretAdapter.MyViewHolder holder, int position) {
+        holder.numlecteur.setText(pret.get(position).getNumlecteur());
+        holder.numlivre.setText(pret.get(position).getNumlivre());
+        holder.datepret.setText(pret.get(position).getDatepret());
+        holder.editPret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String num = lecteur.get(position).getNumlecteur();
-                String nom = lecteur.get(position).getNomlecteur();
-                editLecteur(num, nom);
+                String numlecteur = pret.get(position).getNumlecteur();
+                String numlivre = pret.get(position).getNumlivre();
+                String datepret = pret.get(position).getDatepret();
+                editPret(numlecteur, numlivre, datepret);
             }
         });
-        holder.deleteLecteur.setOnClickListener(new View.OnClickListener() {
+        holder.deletePret.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String num = lecteur.get(position).getNumlecteur();
-                deleteLecteur(num);
+                String numlecteur = pret.get(position).getNumlecteur();
+                String numlivre = pret.get(position).getNumlivre();
+                deletePret(numlecteur, numlivre);
             }
         });
     }
 
     /*UPDATE - PUT*/
-    private void editLecteur(String num, String nom){
+    private void editPret(String numlec, String numliv, String date){
         TextView close, action;
-        EditText numlecteur, nomlecteur;
+        EditText numlecteur, numlivre, datepret;
         Button submit;
 
         dialog = new Dialog(context);
 
-        dialog.setContentView(R.layout.dialog_formslec);
+        dialog.setContentView(R.layout.dialog_formspret);
 
         action = (TextView) dialog.findViewById(R.id.action);
         action.setText("Modification");
@@ -94,11 +97,13 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
         });
 
         numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
-        nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
+        numlivre = (EditText) dialog.findViewById(R.id.numlivreEdit);
+        datepret = (EditText) dialog.findViewById(R.id.datepretEdit);
 
         /*Ancienne valeur*/
-        numlecteur.setText(num);
-        nomlecteur.setText(nom);
+        numlecteur.setText(numlec);
+        numlivre.setText(numliv);
+        datepret.setText(date);
 
         submit = (Button) dialog.findViewById(R.id.submit);
         submit.setText("Modifier");
@@ -107,8 +112,9 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
             public void onClick(View view) {
                 /*Nouvelle valeur*/
                 String numlecteur_val = numlecteur.getText().toString();
-                String nomlecteur_val = nomlecteur.getText().toString();
-                editSubmit(num, numlecteur_val, nomlecteur_val);
+                String numlivre_val = numlivre.getText().toString();
+                String datepret_val = datepret.getText().toString();
+                editSubmit(numlec, numliv, numlecteur_val, numlivre_val, datepret_val);
             }
         });
 
@@ -116,21 +122,25 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
         dialog.show();
     }
 
-    private void editSubmit(String num_old, String num, String nom){
+    private void editSubmit(String numlecteur_old, String numlivre_old, String numlecteur, String numlivre, String datepret){
         /*GET PARAMS*/
         try{
             JSONObject parameters = new JSONObject();
-            parameters.put("numlecteur", num);
-            parameters.put("nomlecteur", nom);
+            parameters.put("numlecteur", numlecteur);
+            parameters.put("numlivre", numlivre);
+            parameters.put("datepret", datepret);
 
             /*UPDATE PARAMS*/
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url+"/"+num_old, parameters,
+            /*url+"/numlecteur="+numlecteur_old+";numlivre="+numlivre_old*/
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+                    url+"/numlecteur%3D"+numlecteur_old+"%3Bnumlivre%3D"+numlivre_old,
+                    parameters,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             dialog.dismiss();
 
-                            Toast.makeText(context, "L'ancien lecteur est mis à jour", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "L'ancien prêt est mis à jour", Toast.LENGTH_LONG).show();
                         }
                     },
                     new Response.ErrorListener() {
@@ -149,7 +159,7 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
     }
 
     /*DELETE - DELETE*/
-    private void deleteLecteur(String num){
+    private void deletePret(String numlecteur, String numlivre){
         TextView close, action, msg;
         Button submit, dismiss;
 
@@ -159,7 +169,7 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
 
         /*Message*/
         msg = (TextView) dialog.findViewById(R.id.deleteMsg);
-        msg.setText("Voulez vous supprimer ce lecteur?");
+        msg.setText("Voulez vous supprimer ce prêt?");
 
         close = (TextView) dialog.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener(){
@@ -183,7 +193,7 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteSubmit(num);
+                deleteSubmit(numlecteur, numlivre);
             }
         });
 
@@ -191,43 +201,44 @@ public class LecteurAdapter extends RecyclerView.Adapter<LecteurAdapter.MyViewHo
         dialog.show();
     }
 
-    private void deleteSubmit(String num){
-            StringRequest request = new StringRequest(Request.Method.DELETE, url+"/"+num,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            dialog.dismiss();
+    private void deleteSubmit(String numlecteur, String numlivre){
+        StringRequest request = new StringRequest(Request.Method.DELETE,
+                url+"/numlecteur%3D"+numlecteur+"%3Bnumlivre%3D"+numlivre,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        dialog.dismiss();
 
-                            Toast.makeText(context, "Le lecteur est supprimé", Toast.LENGTH_LONG).show();
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
-                            error.printStackTrace();
-                        }
-                    });
+                        Toast.makeText(context, "Le pret est supprimé", Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
+                    }
+                });
 
-            Volley.newRequestQueue(context).add(request);
+        Volley.newRequestQueue(context).add(request);
     }
-
 
     @Override
     public int getItemCount() {
-        return lecteur.size();
+        return pret.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView numlecteur, nomlecteur;
-        private ImageView editLecteur, deleteLecteur;
+        private TextView numlecteur, numlivre, datepret;
+        private ImageView editPret, deletePret;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             numlecteur = (TextView) itemView.findViewById(R.id.numlecteur);
-            nomlecteur = (TextView) itemView.findViewById(R.id.nomlecteur);
-            editLecteur = (ImageView) itemView.findViewById(R.id.editLecteur);
-            deleteLecteur = (ImageView) itemView.findViewById(R.id.deleteLecteur);
+            numlivre = (TextView) itemView.findViewById(R.id.numlivre);
+            datepret = (TextView) itemView.findViewById(R.id.datepret);
+            editPret = (ImageView) itemView.findViewById(R.id.editPret);
+            deletePret = (ImageView) itemView.findViewById(R.id.deletePret);
         }
     }
 }

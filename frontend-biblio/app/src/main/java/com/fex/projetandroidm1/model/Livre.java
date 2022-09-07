@@ -11,20 +11,10 @@ public class Livre {
     private String dateeditlivre;
     private String dispolivre;
 
-    public Livre(JSONObject object) {
-        try {
-            this.numlivre = object.getString("numlivre");
-            this.designlivre = object.getString("designlivre");
-            this.autlivre = object.getString("autlivre");
-            this.dateeditlivre = object.getString("dateeditlivre");
-            this.dispolivre = object.getString("dispolivre");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public Livre() {
     }
 
-    public Livre(String numlivre, String designlivre,
-                   String autlivre, String dateeditlivre, String dispolivre) {
+    public Livre(String numlivre, String designlivre, String autlivre, String dateeditlivre, String dispolivre) {
         this.numlivre = numlivre;
         this.designlivre = designlivre;
         this.autlivre = autlivre;
@@ -33,7 +23,7 @@ public class Livre {
     }
 
     public String getNumlivre() {
-        return this.numlivre;
+        return numlivre;
     }
 
     public void setNumlivre(String numlivre) {
@@ -41,7 +31,7 @@ public class Livre {
     }
 
     public String getDesignlivre() {
-        return this.designlivre;
+        return designlivre;
     }
 
     public void setDesignlivre(String designlivre) {
@@ -49,7 +39,7 @@ public class Livre {
     }
 
     public String getAutlivre() {
-        return this.autlivre;
+        return autlivre;
     }
 
     public void setAutlivre(String autlivre) {
@@ -57,7 +47,7 @@ public class Livre {
     }
 
     public String getDateeditlivre() {
-        return this.dateeditlivre;
+        return dateeditlivre;
     }
 
     public void setDateeditlivre(String dateeditlivre) {
@@ -65,7 +55,7 @@ public class Livre {
     }
 
     public String getDispolivre() {
-        return this.dispolivre;
+        return dispolivre;
     }
 
     public void setDispolivre(String dispolivre) {
