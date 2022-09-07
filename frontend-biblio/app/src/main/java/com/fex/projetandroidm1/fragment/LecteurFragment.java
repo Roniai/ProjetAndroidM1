@@ -75,6 +75,7 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_lecteur, container, false);
+
         refresh = (SwipeRefreshLayout) rootView.findViewById(R.id.swipedown);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.lecteur);
 
@@ -142,44 +143,43 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView.setAdapter(lecteurAdapter);
     }
 
+    /*ImageView addLecteur = (ImageView) rootView.findViewById(R.id.addLecteur);*/
+
     /*ADD - POST*/
     public void addLecteur(View v){
-        switch (v.getId()){
-            case R.id.addLecteur:
-                TextView close, action;
-                EditText numlecteur, nomlecteur;
-                Button submit;
+        TextView close, action;
+        EditText numlecteur, nomlecteur;
+        Button submit;
 
-                dialog.setContentView(R.layout.dialog_formslec);
+        dialog.setContentView(R.layout.dialog_formslec);
 
-                action = (TextView) dialog.findViewById(R.id.action);
-                action.setText("Ajout");
+        action = (TextView) dialog.findViewById(R.id.action);
+        action.setText("Ajout");
 
-                close = (TextView) dialog.findViewById(R.id.close);
-                close.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+        close = (TextView) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
-                numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
-                nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
+        numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
+        nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
 
-                submit = (Button) dialog.findViewById(R.id.submit);
-                submit.setText("Ajouter");
-                submit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String numlecteur_val = numlecteur.getText().toString();
-                        String nomlecteur_val = nomlecteur.getText().toString();
-                        addSubmit(numlecteur_val, nomlecteur_val);
-                    }
-                });
+        submit = (Button) dialog.findViewById(R.id.submit);
+        submit.setText("Ajouter");
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String numlecteur_val = numlecteur.getText().toString();
+                String nomlecteur_val = nomlecteur.getText().toString();
+                addSubmit(numlecteur_val, nomlecteur_val);
+            }
+        });
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-        }
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     private void addSubmit(String num, String nom){

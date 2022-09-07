@@ -29,8 +29,8 @@
            android:layout_below="@id/titre"/>
 
        <ImageView
-           android:id="@+id/addLecteur"
            android:onClick="addLecteur"
+           android:id="@+id/addLecteur"
            android:layout_width="35dp"
            android:layout_height="35dp"
            android:background="@drawable/add_icon"

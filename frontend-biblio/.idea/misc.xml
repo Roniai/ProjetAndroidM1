@@ -10,8 +10,10 @@
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/drawable/ic_pret.xml" value="0.1315" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/drawable/rounded_background.xml" value="0.1" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_lecteur.xml" value="0.20416666666666666" />
-        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_main.xml" value="0.1962962962962963" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_livre.xml" value="0.20416666666666666" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_modlecture.xml" value="0.16" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_pret.xml" value="0.20416666666666666" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/dialog_deletelec.xml" value="0.1" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/dialog_formslec.xml" value="0.20416666666666666" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/fragment_lecteur.xml" value="0.1962962962962963" />

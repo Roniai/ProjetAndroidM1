@@ -14,6 +14,12 @@
         android:theme="@style/Theme.ProjetAndroidM1"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PretActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LivreActivity"
+            android:exported="false" />
+        <activity
             android:name=".LecteurActivity"
             android:exported="false" />
         <activity

@@ -1,13 +1,11 @@
 package com.fex.projetandroidm1;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -82,37 +80,62 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
             }
         });
 
+        /*Navigation*/
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
 
-        /*NavController navController = Navigation.findNavController(this, R.id.navHostFragment);*/
-        /*NavigationUI.setupWithNavController(navigationView, navController);*/
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.i("MainActivity", "onNavigationItemSelected: " + item.getItemId());
+                switch (item.getItemId()) {
 
-        int item = navigationView.getCheckedItem().getItemId();
+                    case R.id.menuLecteur:
+                        startActivity(new Intent(MainActivity.this, LecteurActivity.class));
+                        return true;
 
-        switch(item) {
+                    case R.id.menuLivre:
+                        startActivity(new Intent(MainActivity.this, LivreActivity.class));
+                        return true;
+
+                    case R.id.menuPret:
+                        startActivity(new Intent(MainActivity.this, PretActivity.class));
+                        return true;
+                    default:
+                        Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Log.i("MainActivity", "onNavigationItemSelected: nothing clicked");
+                return false;
+            }
+        });
+
+        /*navigationView.setCheckedItem(R.id.menuLecteur);*/
+
+        /*Intent intent = new Intent();
+        switch(navigationView.getCheckedItem().getItemId()) {
             case R.id.menuLecteur:
-                Intent intent = new Intent(this, LecteurActivity.class);
+                intent.setClass(this, LecteurActivity.class);
                 startActivity(intent);
             case R.id.menuLivre:
-                /*intent.putExtra("Sokajy", "VLM Ampitankely");
-                startActivity(intent);*/
+                intent.setClass(this, LivreActivity.class);
+                startActivity(intent);
             case R.id.menuPret:
-                /*intent.putExtra("Sokajy", "VLM Ampitankely");
-                startActivity(intent);*/
+                intent.setClass(this, PretActivity.class);
+                startActivity(intent);
             default:
+                Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
+        }*/
 
-        }
+        /*NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView, navController);*/
+
         /*final TextView textTitle = findViewById(R.id.textTitle);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 textTitle.setText(navDestination.getLabel());
-                if(textTitle="Lecteur"){
-                    Intent intent = new Intent(this, LecteurActivity.class);
-                    startActivity(intent);
-                }
             }
         });*/
 
@@ -130,34 +153,6 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
             }
         });*/
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.navigation_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch(item.getItemId()) {
-            case R.id.menuLecteur:
-                Intent intent = new Intent(this, LecteurActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.menuLivre:
-                *//*Intent intent = new Intent(this, LecteurActivity.class);
-                startActivity(intent);*//*
-                return true;
-            case R.id.menuPret:
-                *//*Intent intent = new Intent(this, LecteurActivity.class);
-                startActivity(intent);*//*
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
 
     /*READ - GET*/
     /*private void getData(){
@@ -245,7 +240,6 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
         dialog.show();
     }
 
-
     private void addSubmit(String num, String nom){
         *//*GET PARAMS*//*
         try{
@@ -283,10 +277,10 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
         }catch (JSONException e){
             e.printStackTrace();
         }
-    }*/
+    }
 
 
-    /*@Override
+    @Override
     public void onRefresh() {
         lecteur.clear();
         getData();
