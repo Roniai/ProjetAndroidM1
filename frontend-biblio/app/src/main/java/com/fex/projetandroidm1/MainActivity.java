@@ -106,6 +106,15 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
                     case R.id.menuPret:
                         startActivity(new Intent(MainActivity.this, PretActivity.class));
                         return true;
+
+                    case R.id.menuPretLecteur:
+                        startActivity(new Intent(MainActivity.this, PretLecteurActivity.class));
+                        return true;
+
+                    case R.id.menuChart:
+                        startActivity(new Intent(MainActivity.this, ChartActivity.class));
+                        return true;
+
                     default:
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }

@@ -99,6 +99,15 @@ public class LivreActivity extends AppCompatActivity implements SwipeRefreshLayo
                     case R.id.menuPret:
                         startActivity(new Intent(LivreActivity.this, PretActivity.class));
                         return true;
+
+                    case R.id.menuPretLecteur:
+                        startActivity(new Intent(LivreActivity.this, PretLecteurActivity.class));
+                        return true;
+
+                    case R.id.menuChart:
+                        startActivity(new Intent(LivreActivity.this, ChartActivity.class));
+                        return true;
+
                     default:
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }

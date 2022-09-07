@@ -99,6 +99,15 @@ public class PretActivity extends AppCompatActivity implements SwipeRefreshLayou
                     case R.id.menuPret:
                         drawerLayout.close();
                         return true;
+
+                    case R.id.menuPretLecteur:
+                        startActivity(new Intent(PretActivity.this, PretLecteurActivity.class));
+                        return true;
+
+                    case R.id.menuChart:
+                        startActivity(new Intent(PretActivity.this, ChartActivity.class));
+                        return true;
+
                     default:
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }

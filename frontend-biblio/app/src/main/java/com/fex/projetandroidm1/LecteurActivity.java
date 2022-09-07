@@ -99,6 +99,15 @@ public class LecteurActivity extends AppCompatActivity implements SwipeRefreshLa
                     case R.id.menuPret:
                         startActivity(new Intent(LecteurActivity.this, PretActivity.class));
                         return true;
+
+                    case R.id.menuPretLecteur:
+                        startActivity(new Intent(LecteurActivity.this, PretLecteurActivity.class));
+                        return true;
+
+                    case R.id.menuChart:
+                        startActivity(new Intent(LecteurActivity.this, ChartActivity.class));
+                        return true;
+
                     default:
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }

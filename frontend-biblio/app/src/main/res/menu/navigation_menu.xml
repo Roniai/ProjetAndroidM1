@@ -20,5 +20,17 @@
         </menu>
     </item>
 
+    <item android:title="Résumé">
+        <menu>
+            <item android:id="@+id/menuPretLecteur"
+                android:icon="@drawable/ic_pretlec"
+                android:title="Prêt d'un lecteur"/>
+
+            <item android:id="@+id/menuChart"
+                android:icon="@drawable/ic_chart"
+                android:title="Disponibilité des livres"/>
+        </menu>
+    </item>
+
 
 </menu>
