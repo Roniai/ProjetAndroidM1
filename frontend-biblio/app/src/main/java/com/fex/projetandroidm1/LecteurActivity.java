@@ -1,26 +1,28 @@
-package com.fex.projetandroidm1.fragment;
+package com.fex.projetandroidm1;
 
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -30,9 +32,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.fex.projetandroidm1.R;
 import com.fex.projetandroidm1.adapter.LecteurAdapter;
 import com.fex.projetandroidm1.model.Lecteur;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,8 +42,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private View rootView;
+public class LecteurActivity extends AppCompatActivity implements OnRefreshListener {
 
     private RequestQueue requestQueue;
     private SwipeRefreshLayout refresh;
@@ -62,23 +63,15 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
     /*Pour régler le problème de TimeoutError*/
     public static int TIMEOUT_MS=15000; //15s
 
-    public LecteurFragment() {
-    }
-
-    /*onCreate = onViewCreated*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_main);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_lecteur, container, false);
-        refresh = (SwipeRefreshLayout) rootView.findViewById(R.id.swipedown);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.lecteur);
+        refresh = (SwipeRefreshLayout) findViewById(R.id.swipedown);
+        recyclerView = (RecyclerView) findViewById(R.id.lecteur);
 
-        dialog = new Dialog(getActivity().getApplicationContext());
+        dialog = new Dialog(this);
 
         refresh.setOnRefreshListener(this);
         refresh.post(new Runnable() {
@@ -88,10 +81,7 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 getData();
             }
         });
-
-        return rootView;
     }
-
 
     /*READ - GET*/
     private void getData(){
@@ -132,54 +122,51 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue = Volley.newRequestQueue(LecteurActivity.this);
         requestQueue.add(arrayRequest);
     }
 
     private void adapterPush(ArrayList<Lecteur> lecteur){
-        lecteurAdapter = new LecteurAdapter(getActivity().getApplicationContext(), lecteur);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        lecteurAdapter = new LecteurAdapter(this, lecteur);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(lecteurAdapter);
     }
 
     /*ADD - POST*/
     public void addLecteur(View v){
-        switch (v.getId()){
-            case R.id.addLecteur:
-                TextView close, action;
-                EditText numlecteur, nomlecteur;
-                Button submit;
+        TextView close, action;
+        EditText numlecteur, nomlecteur;
+        Button submit;
 
-                dialog.setContentView(R.layout.dialog_formslec);
+        dialog.setContentView(R.layout.dialog_formslec);
 
-                action = (TextView) dialog.findViewById(R.id.action);
-                action.setText("Ajout");
+        action = (TextView) dialog.findViewById(R.id.action);
+        action.setText("Ajout");
 
-                close = (TextView) dialog.findViewById(R.id.close);
-                close.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+        close = (TextView) dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
-                numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
-                nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
+        numlecteur = (EditText) dialog.findViewById(R.id.numlecteurEdit);
+        nomlecteur = (EditText) dialog.findViewById(R.id.nomlecteurEdit);
 
-                submit = (Button) dialog.findViewById(R.id.submit);
-                submit.setText("Ajouter");
-                submit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String numlecteur_val = numlecteur.getText().toString();
-                        String nomlecteur_val = nomlecteur.getText().toString();
-                        addSubmit(numlecteur_val, nomlecteur_val);
-                    }
-                });
+        submit = (Button) dialog.findViewById(R.id.submit);
+        submit.setText("Ajouter");
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String numlecteur_val = numlecteur.getText().toString();
+                String nomlecteur_val = nomlecteur.getText().toString();
+                addSubmit(numlecteur_val, nomlecteur_val);
+            }
+        });
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-        }
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 
     private void addSubmit(String num, String nom){
@@ -203,23 +190,24 @@ public class LecteurFragment extends Fragment implements SwipeRefreshLayout.OnRe
                             }
                         });
 
-                        Toast.makeText(getActivity().getApplicationContext(), "Le nouveau lecteur est enregistré", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Le nouveau lecteur est enregistré", Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Une erreur s'est produite", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Une erreur s'est produite", Toast.LENGTH_LONG).show();
                         error.printStackTrace();
                     }
                 });
 
-            Volley.newRequestQueue(getActivity().getApplicationContext()).add(jsonObjectRequest);
+            Volley.newRequestQueue(this).add(jsonObjectRequest);
 
         }catch (JSONException e){
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void onRefresh() {

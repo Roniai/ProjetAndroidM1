@@ -1,9 +1,14 @@
 package com.fex.projetandroidm1;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,26 +47,26 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnRefreshListener {
+public class MainActivity extends AppCompatActivity /*implements OnRefreshListener*/ {
 
-    private RequestQueue requestQueue;
+    /*private RequestQueue requestQueue;
     private SwipeRefreshLayout refresh;
     private ArrayList<Lecteur> lecteur = new ArrayList<>();
     private JsonArrayRequest arrayRequest;
     private JsonObjectRequest jsonObjectRequest;
     private RecyclerView recyclerView;
     private Dialog dialog;
-    private LecteurAdapter lecteurAdapter;
+    private LecteurAdapter lecteurAdapter;*/
 
     /*Lancer dans un émulateur*/
     /*1.Activer WIFI dans l'Emulateur
      *2.http://10.0.2.2:<port> => fait référence à http://localhost:<port> de votre machine*/
-    private String url = "http://10.0.2.2:8000/api/lecteurs";
+    /*private String url = "http://10.0.2.2:8000/api/lecteurs";*/
     /*Lancer dans un smartphone Android*/
     /*private String url = "http://192.168.43.206:8000/api/lecteurs; //Adresse IP WIFI*/
 
     /*Pour régler le problème de TimeoutError*/
-    public static int TIMEOUT_MS=15000; //15s
+    /*public static int TIMEOUT_MS=15000; //15s*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,19 +85,38 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
 
-        /*NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        /*NavController navController = Navigation.findNavController(this, R.id.navHostFragment);*/
+        /*NavigationUI.setupWithNavController(navigationView, navController);*/
 
-        final TextView textTitle = findViewById(R.id.textTitle);
+        int item = navigationView.getCheckedItem().getItemId();
+
+        switch(item) {
+            case R.id.menuLecteur:
+                Intent intent = new Intent(this, LecteurActivity.class);
+                startActivity(intent);
+            case R.id.menuLivre:
+                /*intent.putExtra("Sokajy", "VLM Ampitankely");
+                startActivity(intent);*/
+            case R.id.menuPret:
+                /*intent.putExtra("Sokajy", "VLM Ampitankely");
+                startActivity(intent);*/
+            default:
+
+        }
+        /*final TextView textTitle = findViewById(R.id.textTitle);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 textTitle.setText(navDestination.getLabel());
+                if(textTitle="Lecteur"){
+                    Intent intent = new Intent(this, LecteurActivity.class);
+                    startActivity(intent);
+                }
             }
         });*/
 
-        refresh = (SwipeRefreshLayout) findViewById(R.id.swipedown);
+        /*refresh = (SwipeRefreshLayout) findViewById(R.id.swipedown);
         recyclerView = (RecyclerView) findViewById(R.id.lecteur);
 
         dialog = new Dialog(this);
@@ -104,11 +128,39 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
                 lecteur.clear();
                 getData();
             }
-        });
+        });*/
     }
 
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.menuLecteur:
+                Intent intent = new Intent(this, LecteurActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuLivre:
+                *//*Intent intent = new Intent(this, LecteurActivity.class);
+                startActivity(intent);*//*
+                return true;
+            case R.id.menuPret:
+                *//*Intent intent = new Intent(this, LecteurActivity.class);
+                startActivity(intent);*//*
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
+
     /*READ - GET*/
-    private void getData(){
+    /*private void getData(){
         refresh.setRefreshing(true);
 
         arrayRequest = new JsonArrayRequest(url,
@@ -156,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         recyclerView.setAdapter(lecteurAdapter);
     }
 
-    /*ADD - POST*/
+    *//*ADD - POST*//*
     public void addLecteur(View v){
         TextView close, action;
         EditText numlecteur, nomlecteur;
@@ -193,14 +245,15 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         dialog.show();
     }
 
+
     private void addSubmit(String num, String nom){
-        /*GET PARAMS*/
+        *//*GET PARAMS*//*
         try{
             JSONObject parameters = new JSONObject();
             parameters.put("numlecteur", num);
             parameters.put("nomlecteur", nom);
 
-            /*ADD PARAMS*/
+            *//*ADD PARAMS*//*
             jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -230,12 +283,12 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         }catch (JSONException e){
             e.printStackTrace();
         }
-    }
+    }*/
 
 
-    @Override
+    /*@Override
     public void onRefresh() {
         lecteur.clear();
         getData();
-    }
+    }*/
 }
