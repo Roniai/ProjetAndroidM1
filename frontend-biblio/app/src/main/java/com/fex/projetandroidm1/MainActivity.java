@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*MENU NAVIGATION*/
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
@@ -109,49 +110,6 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
                 return false;
             }
         });
-
-        /*navigationView.setCheckedItem(R.id.menuLecteur);*/
-
-        /*Intent intent = new Intent();
-        switch(navigationView.getCheckedItem().getItemId()) {
-            case R.id.menuLecteur:
-                intent.setClass(this, LecteurActivity.class);
-                startActivity(intent);
-            case R.id.menuLivre:
-                intent.setClass(this, LivreActivity.class);
-                startActivity(intent);
-            case R.id.menuPret:
-                intent.setClass(this, PretActivity.class);
-                startActivity(intent);
-            default:
-                Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
-        }*/
-
-        /*NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
-
-        /*final TextView textTitle = findViewById(R.id.textTitle);
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                textTitle.setText(navDestination.getLabel());
-            }
-        });*/
-
-        /*refresh = (SwipeRefreshLayout) findViewById(R.id.swipedown);
-        recyclerView = (RecyclerView) findViewById(R.id.lecteur);
-
-        dialog = new Dialog(this);
-
-        refresh.setOnRefreshListener(this);
-        refresh.post(new Runnable() {
-            @Override
-            public void run() {
-                lecteur.clear();
-                getData();
-            }
-        });*/
     }
 
     /*READ - GET*/
