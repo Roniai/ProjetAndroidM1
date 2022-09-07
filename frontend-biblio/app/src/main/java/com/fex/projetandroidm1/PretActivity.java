@@ -81,7 +81,7 @@ public class PretActivity extends AppCompatActivity implements SwipeRefreshLayou
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.i("MainActivity", "onNavigationItemSelected: " + item.getItemId());
+                Log.i("PretActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
                     case R.id.menuLecteur:
@@ -99,7 +99,7 @@ public class PretActivity extends AppCompatActivity implements SwipeRefreshLayou
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Log.i("MainActivity", "onNavigationItemSelected: nothing clicked");
+                Log.i("PretActivity", "onNavigationItemSelected: nothing clicked");
                 return false;
             }
         });

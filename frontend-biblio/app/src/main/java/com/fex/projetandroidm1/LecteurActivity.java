@@ -81,7 +81,7 @@ public class LecteurActivity extends AppCompatActivity implements SwipeRefreshLa
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Log.i("MainActivity", "onNavigationItemSelected: " + item.getItemId());
+                Log.i("LecteurActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
                     case R.id.menuLecteur:
@@ -99,7 +99,7 @@ public class LecteurActivity extends AppCompatActivity implements SwipeRefreshLa
                         Toast.makeText(getApplicationContext(), "Erreur de navigation", Toast.LENGTH_LONG).show();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Log.i("MainActivity", "onNavigationItemSelected: nothing clicked");
+                Log.i("LecteurActivity", "onNavigationItemSelected: nothing clicked");
                 return false;
             }
         });
