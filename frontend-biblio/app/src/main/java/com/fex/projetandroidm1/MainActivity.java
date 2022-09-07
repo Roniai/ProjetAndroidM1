@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity /*implements OnRefreshListen
                 Log.i("MainActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
+                    case R.id.menuAccueil:
+                        drawerLayout.close();
+                        return true;
+
                     case R.id.menuLecteur:
                         startActivity(new Intent(MainActivity.this, LecteurActivity.class));
                         return true;

@@ -84,6 +84,10 @@ public class PretActivity extends AppCompatActivity implements SwipeRefreshLayou
                 Log.i("PretActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
+                    case R.id.menuAccueil:
+                        startActivity(new Intent(PretActivity.this, MainActivity.class));
+                        return true;
+
                     case R.id.menuLecteur:
                         startActivity(new Intent(PretActivity.this, LecteurActivity.class));
                         return true;

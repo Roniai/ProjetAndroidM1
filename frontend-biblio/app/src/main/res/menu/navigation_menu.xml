@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menuLecteur"
-        android:icon="@drawable/ic_lecteur"
-        android:title="Lecteur"/>
+    <item android:id="@+id/menuAccueil"
+        android:icon="@drawable/ic_accueil"
+        android:title="Accueil"/>
 
-    <item android:id="@+id/menuLivre"
-        android:icon="@drawable/ic_livre"
-        android:title="Livre"/>
+    <item android:title="Gestion">
+        <menu>
+            <item android:id="@+id/menuLecteur"
+                android:icon="@drawable/ic_lecteur"
+                android:title="Lecteur"/>
 
-    <item android:id="@+id/menuPret"
-        android:icon="@drawable/ic_pret"
-        android:title="Prêt"/>
+            <item android:id="@+id/menuLivre"
+                android:icon="@drawable/ic_livre"
+                android:title="Livre"/>
+
+            <item android:id="@+id/menuPret"
+                android:icon="@drawable/ic_pret"
+                android:title="Prêt"/>
+        </menu>
+    </item>
+
+
 </menu>

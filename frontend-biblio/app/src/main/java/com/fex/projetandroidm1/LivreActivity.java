@@ -84,6 +84,10 @@ public class LivreActivity extends AppCompatActivity implements SwipeRefreshLayo
                 Log.i("LivreActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
+                    case R.id.menuAccueil:
+                        startActivity(new Intent(LivreActivity.this, MainActivity.class));
+                        return true;
+
                     case R.id.menuLecteur:
                         startActivity(new Intent(LivreActivity.this, LecteurActivity.class));
                         return true;

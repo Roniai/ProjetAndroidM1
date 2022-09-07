@@ -84,6 +84,10 @@ public class LecteurActivity extends AppCompatActivity implements SwipeRefreshLa
                 Log.i("LecteurActivity", "onNavigationItemSelected: " + item.getItemId());
                 switch (item.getItemId()) {
 
+                    case R.id.menuAccueil:
+                        startActivity(new Intent(LecteurActivity.this, MainActivity.class));
+                        return true;
+
                     case R.id.menuLecteur:
                         drawerLayout.close();
                         return true;
