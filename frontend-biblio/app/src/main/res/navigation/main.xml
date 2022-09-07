@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuLecteur">
+
+    <fragment
+        android:id="@+id/menuLecteur"
+        android:name="com.fex.projetandroidm1.fragment.LecteurFragment"
+        android:label="Lecteur"
+        tools:layout="@layout/fragment_lecteur" />
+
+    <fragment
+        android:id="@+id/menuLivre"
+        android:name="com.fex.projetandroidm1.fragment.LivreFragment"
+        android:label="Livre"
+        tools:layout="@layout/fragment_livre" />
+
+    <fragment
+        android:id="@+id/menuPret"
+        android:name="com.fex.projetandroidm1.fragment.PretFragment"
+        android:label="Prêt"
+        tools:layout="@layout/fragment_pret" />
+</navigation>

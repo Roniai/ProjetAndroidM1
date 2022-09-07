@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageBiblio"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_biblio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true"/>
+
+    <View
+        android:id="@+id/viewSupproter"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageBiblio"
+        app:layout_constraintEnd_toEndOf="@id/imageBiblio"
+        app:layout_constraintStart_toStartOf="@id/imageBiblio"
+        app:layout_constraintTop_toTopOf="@id/imageBiblio"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="Bibliothèque"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/viewSupproter"
+        app:layout_constraintStart_toEndOf="@id/viewSupproter" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="ges@biblio"
+        android:textColor="@color/myblue"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/imageBiblio"
+        app:layout_constraintTop_toBottomOf="@id/viewSupproter" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
