@@ -19,7 +19,7 @@
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_modlecture.xml" value="0.16" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_pret.xml" value="0.1" />
-        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_pret_lecteur.xml" value="0.20416666666666666" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/activity_pret_lecteur.xml" value="0.16" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/dialog_deletelec.xml" value="0.1685185185185185" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/dialog_formslec.xml" value="0.20416666666666666" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/dialog_formslivre.xml" value="0.20416666666666666" />
@@ -29,8 +29,12 @@
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/fragment_pret.xml" value="0.20416666666666666" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/layout_navigation_header.xml" value="0.25" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/lecteur_list.xml" value="0.18" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/list_livre.xml" value="0.20416666666666666" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/list_pret_lecteur.xml" value="0.20416666666666666" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/livre_list.xml" value="0.18" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/pret_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/layout/pretlecteur_list.xml" value="0.49122807017543857" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/menu/navigation_menu.xml" value="0.22" />
         <entry key="..\:/Pgm/AndroidProjet/ProjetAndroidM1/ProjetAndroidM1/frontend-biblio/app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>

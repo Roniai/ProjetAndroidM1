@@ -23,7 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fex.projetandroidm1.R;
-import com.fex.projetandroidm1.model.Lecteur;
+import com.fex.projetandroidm1.Url;
 import com.fex.projetandroidm1.model.Livre;
 
 import org.json.JSONException;
@@ -36,7 +36,9 @@ public class LivreAdapter extends RecyclerView.Adapter<LivreAdapter.MyViewHolder
     private ArrayList<Livre> livre;
 
     private Dialog dialog;
-    private String url = "http://10.0.2.2:8000/api/livres";
+
+    Url url_classe = new Url();
+    private String url = url_classe.getUrl()+"/livres";
 
     public LivreAdapter(Context context, ArrayList<Livre> livre) {
         this.context = context;
@@ -48,7 +50,7 @@ public class LivreAdapter extends RecyclerView.Adapter<LivreAdapter.MyViewHolder
     public LivreAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        view = layoutInflater.inflate(R.layout.livre_list, parent, false);
+        view = layoutInflater.inflate(R.layout.list_livre, parent, false);
         return new MyViewHolder(view);
     }
 

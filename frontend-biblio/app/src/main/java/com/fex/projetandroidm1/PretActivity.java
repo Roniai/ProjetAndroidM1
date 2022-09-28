@@ -49,12 +49,8 @@ public class PretActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Dialog dialog;
     private PretAdapter pretAdapter;
 
-    /*Lancer dans un émulateur*/
-    /*1.Activer WIFI dans l'Emulateur
-     *2.http://10.0.2.2:<port> => fait référence à http://localhost:<port> de votre machine*/
-    private String url = "http://10.0.2.2:8000/api/prets";
-    /*Lancer dans un smartphone Android*/
-    /*private String url = "http://192.168.43.206:8000/api/prets; //Adresse IP WIFI*/
+    Url url_classe = new Url();
+    private String url = url_classe.getUrl()+"/prets";
 
     /*Pour régler le problème de TimeoutError*/
     public static int TIMEOUT_MS=15000; //15s

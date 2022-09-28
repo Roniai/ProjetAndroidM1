@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fex.projetandroidm1.R;
+import com.fex.projetandroidm1.Url;
 import com.fex.projetandroidm1.model.Pret;
 
 import org.json.JSONException;
@@ -35,7 +36,9 @@ public class PretAdapter extends RecyclerView.Adapter<PretAdapter.MyViewHolder> 
     private ArrayList<Pret> pret;
 
     private Dialog dialog;
-    private String url = "http://10.0.2.2:8000/api/prets";
+
+    Url url_classe = new Url();
+    private String url = url_classe.getUrl()+"/prets";
 
     public PretAdapter(Context context, ArrayList<Pret> pret) {
         this.context = context;
@@ -47,7 +50,7 @@ public class PretAdapter extends RecyclerView.Adapter<PretAdapter.MyViewHolder> 
     public PretAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        view = layoutInflater.inflate(R.layout.pret_list, parent, false);
+        view = layoutInflater.inflate(R.layout.list_pret, parent, false);
         return new MyViewHolder(view);
     }
 

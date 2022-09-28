@@ -24,7 +24,7 @@
         <menu>
             <item android:id="@+id/menuPretLecteur"
                 android:icon="@drawable/ic_pretlec"
-                android:title="Prêt d'un lecteur"/>
+                android:title="Prêts d'un lecteur"/>
 
             <item android:id="@+id/menuChart"
                 android:icon="@drawable/ic_chart"
