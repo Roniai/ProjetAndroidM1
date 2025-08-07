@@ -39,3 +39,14 @@ En haut à droite d'Android Studio, clique sur la petite flèche à côté du bo
 - Laisse les autres options par défaut.
 - Clique sur Apply, puis sur **OK**.
 
+## En cas d'erreur :
+- Mettre à jour Android Studio
+- Dans le fichier **gradle-wrapper.properties** : distributionUrl=https\://services.gradle.org/distributions/gradle-7.6.1-bin.zip
+- **Installer Android 33 : **
+- Ouvre Android Studio
+- Va dans : **Tools > SDK Manager**
+- Onglet **SDK Platforms**
+- Coche **Android 13.0 (Tiramisu) – API Level 33**
+- Clique sur **Apply > OK**
+- Laisse-le installer les composants nécessaires.
+
